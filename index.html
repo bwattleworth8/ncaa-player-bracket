@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024 MMPB</title>
+    <link rel="icon" href="C:\Users\bwattleworth\Python Projects\march-madness-player-bracket\assets\mmff_phoenix_logo.png" type="image/icon type">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        * {
+          margin: 0px;
+          padding: 0px;
+          box-sizing: border-box
+        }
+
+        #main-banner-div {
+          width: 100%;
+          min-height: 150px;
+          line-height: 150px;
+          text-align: center;
+          background-color: lightslategrey;
+        }
+
+        #banner-logo-div {
+          height: 100%;
+          width: 10%;
+          float: left;
+        }
+
+        #banner-logo-div img {
+          height: 140px;
+          width: 140px;
+        }
+
+        #banner-title-div {
+          height: 150px;
+          width: 90%;
+          line-height: 150px;
+          float: right;
+        }
+
+        #main-div {
+          width: 100%;
+          min-height: 750px;
+        }
+
+        #sidebar-div {
+          width: 15%;
+          min-height: 750px;
+          background-color: gray;
+          float: left;
+          text-align: center;
+        }
+
+        #sidebar-div h3:hover {
+          color: blue
+        }
+
+        #twitter-feed {
+          width: 95%;
+        }
+
+        #viewport-div {
+          width: 85%;
+          min-height: 750px;
+          background-color: lightgray;
+          float: right;
+          padding: 10px
+        }
+        
+        #viewport-top-section-div {
+          width: 100%;
+          min-height: 300px;
+          background-color: gray;
+          margin-bottom: 10px;
+        }
+
+        #viewport-top-sub-left-div {
+          width: 50%;
+          min-height: 300px;
+          background-color: black;
+          float: left;
+        }
+
+        #viewport-top-sub-right-div {
+          width: 50%;
+          min-height: 300px;
+          background-color: white;
+          float: right;          
+        }
+
+        #viewport-bottom-section-div {
+          width: 100%;
+          min-height: 450px;
+        }
+
+        #viewport-bottom-table-div {
+          width: 100%;
+          min-height: 450px;
+          background-color: grey; 
+        }        
+
+    </style>
+  </head>
+  <body>
+    <!-- Top Banner Div -->
+    <div id ="main-banner-div">
+      <div id = "banner-logo-div">
+        <img src="C:\Users\bwattleworth\Python Projects\march-madness-player-bracket\assets\mmff_phoenix_logo.png" alt="MMPB 2024">
+      </div>
+      <div id = "banner-title-div">
+        <h1 class="display-2" line-height="150px">
+          March Madness Player Bracket
+          <small class="text-muted"> | 2024</small>
+        </h1>
+      </div>
+    </div>
+    <!-- END Top Banner Div -->
+    <!-- Main Content Div -->
+    <div id ="main-div">
+      <!-- Sidebar Div -->
+      <div id ="sidebar-div">
+        <br>
+        <h3>Bracket Overview</h3>
+        <br>
+        <h3>My Team</h3>
+        <br>
+        <h3>The Draft</h3>
+        <br>
+        <h3>The Feed</h3>
+        <a class="twitter-timeline" id="twitter-feed" data-lang="en" data-height="500" data-dnt="true" data-theme="dark" href="https://twitter.com/PlayerBracket?ref_src=twsrc%5Etfw"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+      <!-- END Sidebar Div -->
+      <!-- Main Viewport Div -->
+      <div id ="viewport-div">
+        <div id =viewport-top-section-div>
+          <div id ="viewport-top-sub-left-div">
+            <table id = "team-leaderboard" class="table table-dark table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Team</th>
+                  <th scope="col">Pts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Team Colin</td>
+                  <td>256</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Team Chris</td>
+                  <td>256</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Team Will</td>
+                  <td>256</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id ="viewport-top-sub-right-div">
+            <table id = "player-leaderboard" class="table table-dark table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Headshot</th>
+                  <th scope="col">Player</th>
+                  <th scope="col">College Team</th>
+                  <th scope="col">Draft Team</th>
+                  <th scope="col">Pts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Img</td>
+                  <td>Tommy Bruner</td>
+                  <td>Denver</td>
+                  <td>Team Colin</td>
+                  <td>256</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Img</td>
+                  <td>Xavier Johnson</td>
+                  <td>Southern</td>
+                  <td>Team Chris</td>
+                  <td>256</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Img</td>
+                  <td>Zach Edey</td>
+                  <td>Purdue</td>
+                  <td>Team Will</td>
+                  <td>256</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id =viewport-bottom-section-div>
+          <div id="viewport-bottom-table-div">
+            <table id = "all-player-stats" class="table table-dark table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Headshot</th>
+                  <th scope="col">Player</th>
+                  <th scope="col">College Team</th>
+                  <th scope="col">Draft Team</th>
+                  <th scope="col">PPG</th>
+                  <th scope="col">2PT FGs</th>
+                  <th scope="col">3PT FGs</th>
+                  <th scope="col">FG%</th>
+                  <th scope="col">2PT FG%</th>
+                  <th scope="col">3PT FG%</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Img</td>
+                  <td>Tommy Bruner</td>
+                  <td>Denver</td>
+                  <td>Team Colin</td>
+                  <td>25.3</td>
+                  <td>158</td>
+                  <td>68</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Img</td>
+                  <td>Xavier Johnson</td>
+                  <td>Southern</td>
+                  <td>Team Chris</td>
+                  <td>23.2</td>
+                  <td>128</td>
+                  <td>61</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Img</td>
+                  <td>Zach Edey</td>
+                  <td>Purdue</td>
+                  <td>Team Will</td>
+                  <td>23.2</td>
+                  <td>202</td>
+                  <td>1</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>Img</td>
+                  <td>Vonterius Woolbright</td>
+                  <td>Western Caro.</td>
+                  <td>Team Colin</td>
+                  <td>22.3</td>
+                  <td>198</td>
+                  <td>10</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>Img</td>
+                  <td>Tyler Thomas</td>
+                  <td>Hofstra</td>
+                  <td>Team Colin</td>
+                  <td>22.1</td>
+                  <td>118</td>
+                  <td>99</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                  <td>x%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- END Main Viewport Div -->
+    </div>
+    <!-- END Main Content Div -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  </body>
+</html>
