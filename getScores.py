@@ -1,9 +1,10 @@
 import functions_framework
 from google.cloud import bigquery
 from urllib.request import urlopen
+from datetime import datetime
 import json
 
-# Writes a json file of metadata for each NCAA men's basketball team to BigQuery
+# Writes/updates today's game scores to BigQuery
 @functions_framework.http
 def main(request):
     """HTTP Cloud Function.
@@ -20,22 +21,23 @@ def main(request):
 
     try:
         # Define the ESPN endpoint containing all NCAAB teams
-        endpoint = "http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=500"
+        endpoint = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=500"
         # Open the URL and read in the HTML
         page = urlopen(endpoint)
-        # Decode the HTML to reveal standard json
+        # Load data from page
         data = json.loads(page.read().decode('utf-8'))
-        # Parse json data and isolate the teams list -- this is a list of dicts
-        teams = data['sports'][0]['leagues'][0]['teams']
-        # Write each individual team record to a List
-        content = []
-        for team in teams:
-            content.append(team['team'])
+        # Get events content
+        content = data['events']
+        # Get events date and create datetime obj
+        # date = data['day']['date']
+        date = datetime.strptime(data['day']['date'], "%Y-%m-%d")
+        # Convert date from YYYY-MM-DD to YYYYMMDD for table sharding
+        shard_date = date.strftime("%Y%m%d")
 
-        # Set table destination variables
+       # Set table destination variables
         project_id = "ncaa-player-bracket"
-        dataset_id = "teams"
-        table_id = "teams"
+        dataset_id = "scores"
+        table_id = f"scores_{shard_date}"
         
         # Create BQ client
         client = bigquery.Client(project = project_id)
@@ -54,7 +56,7 @@ def main(request):
         # Return job result
         result = job.result()
         return str(result)
-    
+
     except Exception as e:
-        print(f"An error occurred while retrieving team data. Error: {e}")
+        print(f"An error occurred while retrieving game scores. Error: {e}")
         return e
