@@ -1,12 +1,12 @@
-import functions
+import local_functions
 from pathlib import Path
 import json
 
 # Update all scores for today
-functions.getScores()
+local_functions.getScores()
 
 # Update all team files
-functions.getTeams()
+local_functions.getTeams()
 
 # Update all team rosters, player stats, and team schedules
 ## Iterate through teams file
@@ -29,8 +29,8 @@ with open("teams.json", 'r') as f:
             if link['text'] == 'Schedule':
                 team_schedule_url = link['href']
         # Call getPlayers to get updated team rosters
-        functions.getPlayers(team_name, team_roster_url)
+        local_functions.getPlayers(team_name, team_roster_url)
         # Call getPlayerStats to get updated team rosters
-        functions.getPlayerStats(team_name, team_stats_url)
+        local_functions.getPlayerStats(team_name, team_stats_url)
         # # Call getSchedule to get updated team schedule
-        functions.getSchedule(team_name, team_schedule_url)
+        local_functions.getSchedule(team_name, team_schedule_url)
