@@ -13,13 +13,11 @@ def main(request):
 
     try:
         # Define the ESPN endpoint containing all NCAAB teams
-        endpoint = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=500"
+        endpoint = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50"
         # Open the URL and read in the HTML
         page = urlopen(endpoint)
-        # Load data from page
-        data = json.loads(page.read().decode('utf-8'))
-        # Get events content, convert List to json string
-        content = json.dumps(data['events'])
+        # Load data from page and drill into 'events'
+        data = json.loads(page.read().decode('utf-8'))['events']
  
         # Get timestamp
         run_time = str(datetime.now().strftime("%Y-%m-%dT%H%M%SZ"))
@@ -32,6 +30,7 @@ def main(request):
         storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         blob = bucket.blob(file_path)
+        content = '\n'.join([json.dumps(item) for item in data])
         blob.upload_from_string(data=content, content_type="application/json")
 
         print(f"NCAAB scores updated at {run_time}.")
