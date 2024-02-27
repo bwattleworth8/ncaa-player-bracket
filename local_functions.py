@@ -1,8 +1,11 @@
 from urllib.request import urlopen
+import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import json
 import re
+
+import ssl
 
 # Writes a json file of metadata for each NCAA men's basketball team into the teams/ directory
 def getTeams():
@@ -80,41 +83,87 @@ def getPlayers(team_name, team_roster_url):
         return e
 
 # Writes a json file of per game stats and season total stats for players of given team
-## Requires a team's ESPN team name and team stats URL
-def getPlayerStats(team_name, team_stats_url):
+# Requires a team's ESPN team name and team stats URL
+# def getPlayerStats(team_name, team_stats_url):
+#     try:
+#         # Open the URL and read in the HTML
+#         page = urlopen(team_stats_url)
+#         # Decode the HTML
+#         html = page.read().decode("utf-8")
+#         # Parse HTML with BeautifulSoup
+#         soup = BeautifulSoup(html, "html.parser")
+#         # Find the Per Game Stats table
+#         ## First get the players names
+#         per_game_stats_players = soup.findAll('table', {'class': 'Table Table--align-right Table--fixed Table--fixed-left'})[0]
+#         ## Then get their respective stats
+#         per_game_stats_metrics = soup.findAll('table', {'class': 'Table Table--align-right'})[0]
+#         # Find the Season Totals table
+#         ## First get the players names
+#         season_totals_players = soup.findAll('table', {'class': 'Table Table--align-right Table--fixed Table--fixed-left'})[1]
+#         ## Then get their respective stats
+#         season_totals_metrics = soup.findAll('table', {'class': 'Table Table--align-right'})[1]
+#         # Convert the stats tables to DataFrames
+#         per_game_stats_players_df = pd.read_html(str(per_game_stats_players))[0]
+#         per_game_stats_metrics_df = pd.read_html(str(per_game_stats_metrics))[0]
+#         season_totals_players_df = pd.read_html(str(season_totals_players))[0]
+#         season_totals_metrics_df = pd.read_html(str(season_totals_metrics))[0]
+#         # Concatenate the player and metric tables for both per game and season tables
+#         per_game_stats_df = pd.concat([per_game_stats_players_df, per_game_stats_metrics_df], axis=1)
+#         season_totals_df = pd.concat([season_totals_players_df, season_totals_metrics_df], axis=1)        
+#         # Set file_name and convert DataFrame to newline json, write to file
+#         per_game_file_name = f"playerStats/{team_name}_per_game_stats.json"
+#         season_file_name = f"playerStats/{team_name}_season_total_stats.json"
+#         per_game_data = per_game_stats_df.to_json(per_game_file_name, orient='records', lines=True)
+#         season_data = season_totals_df.to_json(season_file_name, orient='records', lines=True)
+#         return f"Successfully wrote player stats files for {team_name}."
+#     except Exception as e:
+#         print(f"An error occurred while retrieving player statistics for {team_name}. Error: {e}")
+#         return e
+
+def getPlayerStats():
     try:
+        playerStatsUrl = "https://www.espn.com/mens-college-basketball/stats/player"
+
         # Open the URL and read in the HTML
-        page = urlopen(team_stats_url)
+        response = requests.get(playerStatsUrl, verify=False)
+        print(response)
         # Decode the HTML
-        html = page.read().decode("utf-8")
+        html = response.read().decode("utf-8")
         # Parse HTML with BeautifulSoup
         soup = BeautifulSoup(html, "html.parser")
-        # Find the Per Game Stats table
-        ## First get the players names
-        per_game_stats_players = soup.findAll('table', {'class': 'Table Table--align-right Table--fixed Table--fixed-left'})[0]
-        ## Then get their respective stats
-        per_game_stats_metrics = soup.findAll('table', {'class': 'Table Table--align-right'})[0]
-        # Find the Season Totals table
-        ## First get the players names
-        season_totals_players = soup.findAll('table', {'class': 'Table Table--align-right Table--fixed Table--fixed-left'})[1]
-        ## Then get their respective stats
-        season_totals_metrics = soup.findAll('table', {'class': 'Table Table--align-right'})[1]
-        # Convert the stats tables to DataFrames
-        per_game_stats_players_df = pd.read_html(str(per_game_stats_players))[0]
-        per_game_stats_metrics_df = pd.read_html(str(per_game_stats_metrics))[0]
-        season_totals_players_df = pd.read_html(str(season_totals_players))[0]
-        season_totals_metrics_df = pd.read_html(str(season_totals_metrics))[0]
-        # Concatenate the player and metric tables for both per game and season tables
-        per_game_stats_df = pd.concat([per_game_stats_players_df, per_game_stats_metrics_df], axis=1)
-        season_totals_df = pd.concat([season_totals_players_df, season_totals_metrics_df], axis=1)        
-        # Set file_name and convert DataFrame to newline json, write to file
-        per_game_file_name = f"playerStats/{team_name}_per_game_stats.json"
-        season_file_name = f"playerStats/{team_name}_season_total_stats.json"
-        per_game_data = per_game_stats_df.to_json(per_game_file_name, orient='records', lines=True)
-        season_data = season_totals_df.to_json(season_file_name, orient='records', lines=True)
-        return f"Successfully wrote player stats files for {team_name}."
+        # Find the player stats table
+        player_stat_table = soup.find('table', {'class': 'ResponsiveTable'})
+
+        player_start_pd = pd.read_html(str(player_stat_table))
+        print(player_start_pd)
+
+        # table_len = x
+        # listX = []
+
+        # for (x = 0 < table_len, x++):
+        #     querySelectAll("rowClass")[x]
+
+
+
+
+
+
+
+        # per_game_stats_players_df = pd.read_html(str(per_game_stats_players))[0]
+        # per_game_stats_metrics_df = pd.read_html(str(per_game_stats_metrics))[0]
+        # season_totals_players_df = pd.read_html(str(season_totals_players))[0]
+        # season_totals_metrics_df = pd.read_html(str(season_totals_metrics))[0]
+        # # Concatenate the player and metric tables for both per game and season tables
+        # per_game_stats_df = pd.concat([per_game_stats_players_df, per_game_stats_metrics_df], axis=1)
+        # season_totals_df = pd.concat([season_totals_players_df, season_totals_metrics_df], axis=1)        
+        # # Set file_name and convert DataFrame to newline json, write to file
+        # per_game_file_name = f"playerStats/{team_name}_per_game_stats.json"
+        # season_file_name = f"playerStats/{team_name}_season_total_stats.json"
+        # per_game_data = per_game_stats_df.to_json(per_game_file_name, orient='records', lines=True)
+        # season_data = season_totals_df.to_json(season_file_name, orient='records', lines=True)
+        return f"Successfully wrote player stat files."
     except Exception as e:
-        print(f"An error occurred while retrieving player statistics for {team_name}. Error: {e}")
+        print(f"An error occurred while retrieving player statistics. Error: {e}")
         return e
     
 # Writes a json file representing the schedule of given team
