@@ -5,13 +5,12 @@ import pandas as pd
 import json
 import re
 
-import ssl
 
 # Writes a json file of metadata for each NCAA men's basketball team into the teams/ directory
 def getTeams():
     try:
         # Define the ESPN endpoint containing all NCAAB teams
-        endpoint = "http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=500"
+        endpoint = "https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/teams/?group=50&limit=1000"
         # Open the URL and read in the HTML
         page = urlopen(endpoint)
         # Decode the HTML to reveal standard json
